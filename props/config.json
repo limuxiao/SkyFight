@@ -1,0 +1,10 @@
+{
+    "base": {
+        "title": "SkyFight",
+        "width": 500,
+        "height": 500
+    },
+    "path":{
+    	"imgBackground":"./sources/image/bg.png"
+    }
+}
