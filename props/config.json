@@ -4,7 +4,14 @@
         "width": 500,
         "height": 500
     },
-    "path":{
-    	"imgBackground":"./sources/image/bg.png"
+    "image":{
+    	"bg":"./sources/image/bg.png",
+    	"big":"./sources/image/big.png"
+    },
+    "music":{
+    	"bg01":"./sources/music/bg01.mp3",
+    	"bg02":"./sources/music/bg02.mp3",
+    	"bg03":"./sources/music/bg03.mp3",
+    	"bg04":"./sources/music/bg04.mp3"
     }
 }

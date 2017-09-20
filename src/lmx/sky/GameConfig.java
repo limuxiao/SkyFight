@@ -32,7 +32,8 @@ public class GameConfig implements Serializable{
 	
 	
 	public BaseConfig base;
-	public PathConfig path;
+	public ImageConfig image;
+	public MusicConfig music;
 	
 	
 	private static GameConfig config;
@@ -143,14 +144,38 @@ public class GameConfig implements Serializable{
 	 *
 	 * @version V1.0.1
 	 */
-	public static class PathConfig implements Serializable{
+	public static class ImageConfig implements Serializable{
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = -4300140164174530550L;
 		
-		public String imgBackground;	//背景图	
+		public String bg;	//背景图	
+		public String big;
+		
+	}
+	
+	
+	/**
+	 * @classname  MusicConfig	音乐配置
+	 * @desc
+	 * @createtime 2017年9月20日 上午9:38:07      
+	 * @author liyan
+	 *
+	 * @version V1.0.1
+	 */
+	public static class MusicConfig implements Serializable{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2861667282019195759L;
+		
+		public String bg01;		//bg music 01
+		public String bg02;		//bg music 02
+		public String bg03;		//bg music 03
+		public String bg04;		//bg music 04
 		
 	}
 	
