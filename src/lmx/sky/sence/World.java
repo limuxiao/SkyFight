@@ -1,6 +1,7 @@
 package lmx.sky.sence;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -163,7 +164,7 @@ public class World extends JFrame{
 	 * 开始游戏按钮触发事件
 	 */
 	public void startGame() {
-		
+		this.setVisible(false);
 		
 	}
 	
