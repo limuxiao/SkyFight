@@ -151,8 +151,10 @@ public class GameConfig implements Serializable{
 		 */
 		private static final long serialVersionUID = -4300140164174530550L;
 		
-		public String bg;	//背景图	
+		public String bgStart;		//初始画面背景图
+		public String bgPlay;		//开始游戏后背景图
 		public String big;
+		public String gameStart;	//开始按钮贴图
 		
 	}
 	

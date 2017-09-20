@@ -1,16 +1,24 @@
-package lmx.sky.pojo;
+package lmx.sky.sence;
 
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import org.omg.Messaging.SyncScopeHelper;
 
 import lmx.sky.GameConfig;
 import lmx.sky.GameState;
@@ -98,8 +106,8 @@ public class World extends JFrame{
 		//初始化监听器
 		this.initListener();
 		
-		//初始化lable
-		this.initLable();
+		//初始化panel
+		this.initPanel();
 		
 		
 		
@@ -121,14 +129,39 @@ public class World extends JFrame{
 	}
 	
 	/**
-	 * 初始化lable
+	 * 初始化panel
 	 */
-	private void initLable() {
+	private void initPanel() {
 		
-		Icon bgIcon = ImageTool.getIcon(this.config.image.bg);
-		JLabel label = new JLabel(bgIcon);
+		
+		//设置背景
+		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgStart);
+		iconBg.setImage(iconBg.getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH));  
+		final JLabel label = new JLabel(iconBg);
 		label.setBounds(0, 0, this.width, this.height);
 		c.add(label);
+		
+		//设置开始按钮
+		Icon iconStart = ImageTool.getIcon(this.config.image.gameStart);
+		JButton btnStart = new JButton(iconStart);
+		int btnStartX = (this.width - iconStart.getIconWidth()) / 2;
+		int btnStartY = this.height - iconStart.getIconHeight() - 100;
+		btnStart.setBounds(btnStartX, btnStartY, iconStart.getIconWidth(), iconStart.getIconHeight());
+		btnStart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startGame();
+			}
+		});
+		
+		c.add(btnStart);
+		
 	}
+	
+	public void startGame() {
+		System.out.println("开始游戏");
+	}
+	
 
 }

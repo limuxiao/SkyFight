@@ -2,11 +2,13 @@
     "base": {
         "title": "SkyFight",
         "width": 500,
-        "height": 500
+        "height": 800
     },
     "image":{
-    	"bg":"./sources/image/bg.png",
-    	"big":"./sources/image/big.png"
+    	"bgStart":"./sources/image/img_bg02.jpg",
+    	"bgPlay":"./sources/image/img_bg03.png",
+    	"big":"./sources/image/big.png",
+    	"gameStart":"./sources/image/img_game_start.png"
     },
     "music":{
     	"bg01":"./sources/music/bg01.mp3",
