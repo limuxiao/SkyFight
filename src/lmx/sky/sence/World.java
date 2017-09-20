@@ -41,7 +41,7 @@ public class World extends JFrame{
 	public static final int DEFAULT_WIDTH;
 	public static final int DEFAULT_HEIGHT;
 	
-	private GameState curState;		//当前游戏状态
+	private GameState curState = GameState.DEFAULT;		//当前游戏状态
 	private GameConfig config = GameConfig.getInstance();
 	
 	private int width;
@@ -109,9 +109,8 @@ public class World extends JFrame{
 		//初始化panel
 		this.initPanel();
 		
-		
-		
-		
+		//设置游戏状态
+		this.setCurState(GameState.CREATE);
 	}
 	
 	
@@ -159,9 +158,24 @@ public class World extends JFrame{
 		
 	}
 	
+	
+	/**
+	 * 开始游戏按钮触发事件
+	 */
 	public void startGame() {
-		System.out.println("开始游戏");
+		
+		
 	}
 	
+	
+	
+	public void setCurState(GameState curState) {
+		this.curState = curState;
+	}
 
+	
+	
+	public GameState getCurState() {
+		return curState;
+	}
 }

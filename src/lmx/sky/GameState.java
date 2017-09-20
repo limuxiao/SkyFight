@@ -12,6 +12,7 @@ import lmx.sky.sence.World;
  */
 public enum GameState {
 	
+	DEFAULT,	//默认状态
 	CREATE,		//创建
 	START,		//开始
 	PAUSE,		//暂停

@@ -56,6 +56,7 @@ public class GameConfig implements Serializable{
 	 * 加载config
 	 */
 	public static void loadConfig() {
+		System.out.println("开始加载静态资源...");
 		try {
 			String pathname = "./props/config.json";
 			FileInputStream fis = new FileInputStream(new File(pathname));

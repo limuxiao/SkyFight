@@ -30,12 +30,12 @@ public class GameMouseListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		System.out.println("鼠标进入");
+//		System.out.println("鼠标进入");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		System.out.println("鼠标移出");
+//		System.out.println("鼠标移出");
 	}
 
 }
