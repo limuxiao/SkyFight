@@ -8,6 +8,9 @@
     	"bgStart":"./sources/image/img_bg02.png",
     	"bgPlay":"./sources/image/img_bg03.png",
     	"big":"./sources/image/big.png",
+    	
+    	"myPlane":"./sources/image/img_myplane.png",
+    	"enemyLevel8":"./sources/image/img_enemy_level8.png",
     	"gameStart":"./sources/image/img_game_start.png"
     },
     "music":{

@@ -1,6 +1,6 @@
 package lmx.sky;
 
-import lmx.sky.sence.World;
+import lmx.sky.scenes.World;
 
 /**
  * @classname  GameState 游戏状态类

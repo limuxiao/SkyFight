@@ -1,16 +1,22 @@
-package lmx.sky.sence;
+package lmx.sky.scenes;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +31,7 @@ import lmx.sky.GameConfig;
 import lmx.sky.GameState;
 import lmx.sky.listener.GameKeyListener;
 import lmx.sky.listener.GameMouseListener;
+import lmx.sky.pojo.MyPlane;
 import lmx.sky.tools.ImageTool;
 
 /**
@@ -43,13 +50,22 @@ public class World extends JFrame{
 	public static final int DEFAULT_HEIGHT;
 	
 	private GameState curState = GameState.DEFAULT;		//当前游戏状态
-	private GameConfig config = GameConfig.getInstance();
+	public GameConfig config = GameConfig.getInstance();
 	
-	private int width;
-	private int height;
+	public int width;
+	public int height;
 	
 	private Container c;
+	private Graphics graphics;
 	
+	
+	private JLabel labelBg;		//背景label
+	private JButton btnStart;	//开始游戏btn
+	public MyPlane myPlane;	//
+	
+	
+	private GameKeyListener myKeyListener;
+	private GameMouseListener myMouseListener;
 	
 	static {
 		//获取屏幕宽高
@@ -92,6 +108,9 @@ public class World extends JFrame{
 		//将this.getContentPane()赋值给c，便于书写
 		c = getContentPane();
 		
+		//
+		graphics = this.getGraphics();
+		
 		this.init();
 		
 		//显示窗口
@@ -121,10 +140,13 @@ public class World extends JFrame{
 	private void initListener() {
 		
 		//添加键盘监听器
-		this.addKeyListener(new GameKeyListener());
+		if(myKeyListener == null) 
+			myKeyListener = new GameKeyListener(this);
+		this.addKeyListener(myKeyListener);
 		
 		//添加鼠标监听器
-		this.addMouseListener(new GameMouseListener());
+		myMouseListener = new GameMouseListener();
+		this.addMouseListener(myMouseListener);
 		
 	}
 	
@@ -137,13 +159,13 @@ public class World extends JFrame{
 		//设置背景
 		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgStart);
 		iconBg.setImage(iconBg.getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH));  
-		final JLabel label = new JLabel(iconBg);
-		label.setBounds(0, 0, this.width, this.height);
-		c.add(label);
+		labelBg = new JLabel(iconBg);
+		labelBg.setBounds(0, 0, this.width, this.height);
+		c.add(labelBg);
 		
 		//设置开始按钮
 		Icon iconStart = ImageTool.getIcon(this.config.image.gameStart);
-		JButton btnStart = new JButton(iconStart);
+		btnStart = new JButton(iconStart);
 		int btnStartX = (this.width - iconStart.getIconWidth()) / 2;
 		int btnStartY = this.height - iconStart.getIconHeight() - 100;
 		btnStart.setBounds(btnStartX, btnStartY, iconStart.getIconWidth(), iconStart.getIconHeight());
@@ -157,6 +179,9 @@ public class World extends JFrame{
 		
 		c.add(btnStart);
 		
+		
+		
+		
 	}
 	
 	
@@ -164,12 +189,108 @@ public class World extends JFrame{
 	 * 开始游戏按钮触发事件
 	 */
 	public void startGame() {
-		this.setVisible(false);
+		
+		//切换游戏状态
+		this.setCurState(GameState.START);
+		
+		//先将所有component隐藏
+		for (Component component : c.getComponents()) {
+			component.setVisible(false);
+		}
+		
+		//切换背景
+		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgPlay);
+		iconBg.setImage(iconBg.getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH));  
+		labelBg.setIcon(iconBg);
+		labelBg.setVisible(true);
+		
+		
+		createPlane();
+		
+		
+		
+	}
+	
+	
+	public void createPlane() {
+		//创建主角
+		myPlane = new MyPlane();
+		myPlane.setLocation((this.width - myPlane.width) / 2, this.height);
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				try {
+					
+					for(int i = 0; i< 20 ; i++) {
+						myPlane.moveUp();
+						repaint();
+						Thread.sleep(20);
+					}
+					
+					//获取焦点
+					requestFocus();
+					
+					//设置可控
+					myKeyListener.setEnable(true);
+					myMouseListener.setEnable(true);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}).start();
+	}
+	
+	
+	
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		switch (curState) {
+		case START:				//游戏开始
+			drawStart(g);
+			break;
+			
+			
+		default:
+			break;
+
+		}
+		
+	}
+	
+	
+	private void drawStart(Graphics g) {
+		
+		//绘制主机
+		if(myPlane != null)
+			myPlane.draw(g);
+		
 		
 	}
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	public void setCurState(GameState curState) {
 		this.curState = curState;
 	}

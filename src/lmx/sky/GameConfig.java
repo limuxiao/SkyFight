@@ -156,6 +156,8 @@ public class GameConfig implements Serializable{
 		public String bgPlay;		//开始游戏后背景图
 		public String big;
 		public String gameStart;	//开始按钮贴图
+		public String enemyLevel8;	//敌机 leve8
+		public String myPlane;		//主机
 		
 	}
 	

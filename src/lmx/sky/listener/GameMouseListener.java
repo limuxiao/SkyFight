@@ -13,6 +13,8 @@ import java.awt.event.MouseListener;
  */
 public class GameMouseListener implements MouseListener {
 
+	private boolean isEnable = false;	//是否可控，true -- 可控 ， false -- 不可控
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
@@ -30,12 +32,24 @@ public class GameMouseListener implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-//		System.out.println("鼠标进入");
+		if(isEnable)
+			System.out.println("鼠标进入");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-//		System.out.println("鼠标移出");
+		if(isEnable)
+			System.out.println("鼠标移出");
 	}
 
+	
+	
+	
+	public boolean isEnable() {
+		return isEnable;
+	}
+
+	public void setEnable(boolean isEnable) {
+		this.isEnable = isEnable;
+	}
 }
