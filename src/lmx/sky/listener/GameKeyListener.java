@@ -35,16 +35,12 @@ public class GameKeyListener implements KeyListener{
 		if(!isEnable) return;
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_A:		//左移
-			this.world.myPlane.moveLeft();
 			break;
 		case KeyEvent.VK_S:		//下移
-			this.world.myPlane.moveDown();
 			break;
 		case KeyEvent.VK_W:		//上移
-			this.world.myPlane.moveUp();
 			break;
 		case KeyEvent.VK_D:		//右移
-			this.world.myPlane.moveRight();
 			break;
 			
 		default:

@@ -13,7 +13,7 @@ import javax.swing.Icon;
  *
  * @version V1.0.1
  */
-public class Plane extends Elf implements Serializable{
+public class Plane extends GameObject implements Serializable{
 	
 	
 	/**
@@ -21,12 +21,10 @@ public class Plane extends Elf implements Serializable{
 	 */
 	private static final long serialVersionUID = 5225308653335053068L;
 	
-	public int HP;	//血量
-	
 	
 	
 	public Plane() {
-		this.canMove = true;	//可以移动
+		super();
 	}
 	
 	

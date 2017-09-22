@@ -31,7 +31,6 @@ public class PlanePanel extends JPanel {
 		//绘制主角
 		System.out.println("绘制主角...");
 //		myPlane.draw(g);
-		g.drawImage(myPlane.image,myPlane.x,myPlane.y,myPlane.width,myPlane.height,null);
 		
 		super.paint(g);
 	}

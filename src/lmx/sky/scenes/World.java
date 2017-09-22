@@ -215,7 +215,6 @@ public class World extends JFrame{
 	public void createPlane() {
 		//创建主角
 		myPlane = new MyPlane();
-		myPlane.setLocation((this.width - myPlane.width) / 2, this.height);
 		
 		new Thread(new Runnable() {
 			
@@ -225,7 +224,6 @@ public class World extends JFrame{
 				try {
 					
 					for(int i = 0; i< 20 ; i++) {
-						myPlane.moveUp();
 						repaint();
 						Thread.sleep(20);
 					}

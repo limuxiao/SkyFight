@@ -35,17 +35,11 @@ public class MyPlane extends Plane implements Serializable{
 	
 	public MyPlane() {
 		super();
-		this.icon = MyPlaneIcon; 
-		this.speed = 5;
-		this.image = ((ImageIcon)this.icon).getImage();
-		this.width = this.icon.getIconWidth();
-		this.height = this.icon.getIconHeight();
 	}
 	
 	
 	public void draw(Graphics g) {
 		
-		g.drawImage(this.image,this.x,this.y,this.width,this.height,null);
 		
 	}
 	
