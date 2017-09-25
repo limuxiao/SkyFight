@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.swing.Icon;
 
+import lmx.sky.componts.Translate;
+
 /**
  * @classname  Plane		--		飞行器
  * @desc
@@ -25,6 +27,8 @@ public class Plane extends GameObject implements Serializable{
 	
 	public Plane() {
 		super();
+		Translate translate = new Translate();
+		this.addComponent(translate);
 	}
 	
 	

@@ -12,7 +12,16 @@ public class Translate extends BaseComponent{
 	
 	public int x;	//横坐标
 	public int y;	//纵坐标
-	public int width;	//宽	
-	public int height;	//高
+	
+	
+	public Translate() {
+		this(0,0);
+	}
+	
+	public Translate(int x,int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 
 }
