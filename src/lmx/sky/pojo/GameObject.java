@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.Icon;
+import javax.swing.JLabel;
 
 import org.apache.commons.lang3.StringUtils;
 
 import lmx.sky.componts.BaseComponent;
 import lmx.sky.componts.Translate;
+import lmx.sky.tools.BaseTool;
 
 /**
  * @classname  GameObject	游戏物体，所有物体的基类
@@ -22,7 +24,7 @@ import lmx.sky.componts.Translate;
  *
  * @version V1.0.1
  */
-public class GameObject implements Serializable{
+public class GameObject extends JLabel implements Serializable{
 	
 	
 	public String id;		//物体id
@@ -97,7 +99,7 @@ public class GameObject implements Serializable{
 	 * 获取gameobject所有组件列表
 	 * @return
 	 */
-	public List<BaseComponent> getComponents() {
+	public List<BaseComponent> getAllComponents() {
 		return new ArrayList<>(this.components.values());
 	}
 	
@@ -114,44 +116,13 @@ public class GameObject implements Serializable{
 	
 	
 	/**
-	 * 添加子物体,这个方法稍微复杂点儿
+	 * 添加子物体
 	 * @param gameObject
 	 * @return
 	 */
 	public boolean addGameObject(GameObject gameObject) {
 		
-		if(gameObject == null) return false;
-		
-		
-		
-		//1.首先获取gameobject的id,如果id为空，则获取类名
-		String id = 
-				StringUtils.isEmpty(gameObject.id) 
-						? gameObject.getClass().getSimpleName()
-						: gameObject.id ;
-		
-		//2.获取所有的key，判断是否包含id
-		List<String> keys = new ArrayList<>(this.gameObjects.keySet());
-		
-		if(keys.contains(id)) {
-			
-			int index = 0;
-			
-			for(String key : keys) {
-				if(key.startsWith(id + "_")) {
-					int i = Integer.parseInt(key.split(id+"_")[1]);
-					if(index < i) index = i;
-				}
-			}
-			index ++;
-			this.gameObjects.put(id+"_"+index, gameObject);
-			
-			
-		}else {
-			this.gameObjects.put(id, gameObject);
-		}
-		
-		return true;
+		return BaseTool.addGameObject(this.gameObjects, gameObject);
 	}
 	
 	/**

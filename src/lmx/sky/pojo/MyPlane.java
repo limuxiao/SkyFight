@@ -42,6 +42,8 @@ public class MyPlane extends Plane implements Serializable{
 		
 		Material material = new Material(MyPlaneIcon);
 		this.addComponent(material);
+		
+		this.setIcon(this.getComponent(Material.class).icon);
 	}
 	
 	

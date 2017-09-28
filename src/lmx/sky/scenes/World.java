@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.security.cert.CRLReason;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -29,8 +32,10 @@ import org.omg.Messaging.SyncScopeHelper;
 
 import lmx.sky.GameConfig;
 import lmx.sky.GameState;
+import lmx.sky.componts.Material;
 import lmx.sky.listener.GameKeyListener;
 import lmx.sky.listener.GameMouseListener;
+import lmx.sky.pojo.GameObject;
 import lmx.sky.pojo.MyPlane;
 import lmx.sky.tools.ImageTool;
 
@@ -66,6 +71,11 @@ public class World extends JFrame{
 	
 	private GameKeyListener myKeyListener;
 	private GameMouseListener myMouseListener;
+	
+	
+	
+	protected Map<String, Scenes> scenesMap = new HashMap<>();
+	
 	
 	static {
 		//获取屏幕宽高
@@ -111,12 +121,61 @@ public class World extends JFrame{
 		//
 		graphics = this.getGraphics();
 		
-		this.init();
+//		this.init();
+		
+		addScenes();
 		
 		//显示窗口
 		this.setVisible(true);
 	}
 	
+	
+	public void addScenes() {
+		
+		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgStart);
+		
+		CreateScenes scenes = new CreateScenes(this.width,this.height,iconBg);
+		
+		//设置开始按钮
+		Icon iconStart = ImageTool.getIcon(this.config.image.gameStart);
+		btnStart = new JButton(iconStart);
+		int btnStartX = (this.width - iconStart.getIconWidth()) / 2;
+		int btnStartY = this.height - iconStart.getIconHeight() - 100;
+		btnStart.setBounds(btnStartX, btnStartY, iconStart.getIconWidth(), iconStart.getIconHeight());
+		btnStart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				CreateScenes createScenes = getScenes(CreateScenes.class);
+			}
+		});
+				
+		
+		scenes.add(btnStart);
+		
+		addScenes(scenes);
+		
+	}
+	
+	
+	/**
+	 * 添加一个场景，并显示在最上层
+	 * @param scenes
+	 */
+	public void addScenes(Scenes scenes){
+		this.add(scenes);
+		this.scenesMap.put(scenes.getClass().getSimpleName(), scenes);
+		this.setComponentZOrder(scenes, 0);
+	}
+	
+	/**
+	 * 根据场景类获取场景
+	 * @param clazz
+	 * @return
+	 */
+	public <T> Scenes getScenes(Class<T> clazz) {
+		return this.scenesMap.get(clazz.getSimpleName()); 
+	}
 	
 	/**
 	 * init
@@ -176,6 +235,9 @@ public class World extends JFrame{
 				startGame();
 			}
 		});
+		
+		
+		JPanel panel = new JPanel();
 		
 		c.add(btnStart);
 		

@@ -32,5 +32,12 @@ public class Plane extends GameObject implements Serializable{
 	}
 	
 	
+	public static void main(String[] args) {
+		GameObject gameObject = new GameObject();
+		Plane plane = new Plane();
+		gameObject.addGameObject(plane);
+		Plane plane2 = (Plane) gameObject.findGameObjectsByClass(Plane.class);
+	}
+	
 
 }
