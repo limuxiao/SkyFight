@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import lmx.sky.GameConfig;
 import lmx.sky.componts.Material;
+import lmx.sky.componts.Translate;
 import lmx.sky.scenes.PlanePanel;
 import lmx.sky.tools.ImageTool;
 
@@ -42,8 +43,12 @@ public class MyPlane extends Plane implements Serializable{
 		
 		Material material = new Material(MyPlaneIcon);
 		this.addComponent(material);
+		Translate translate = new Translate();
+		this.addComponent(translate);
 		
-		this.setIcon(this.getComponent(Material.class).icon);
+		Icon icon = this.getComponent(Material.class).icon;
+		
+		this.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
 	}
 	
 	

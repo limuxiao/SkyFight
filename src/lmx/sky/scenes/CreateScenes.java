@@ -23,19 +23,12 @@ import lmx.sky.tools.ImageTool;
  */
 public class CreateScenes extends Scenes{
 	
-	private JLabel labelBg;
-	
 	public CreateScenes() {
 		super();
 	}
 	
 	public CreateScenes(int width,int height) {
 		super(width,height);
-		joinLabel();
-	}
-	
-	public CreateScenes(int width, int height,ImageIcon icon) {
-		super(width,height,icon);
 		joinLabel();
 	}
 	
@@ -62,15 +55,18 @@ public class CreateScenes extends Scenes{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("开启游戏");
+				if(world != null) {
+					
+					PlayScenes playScenes = new PlayScenes(world.width,world.height);
+					playScenes.setWorld(world);
+					
+					world.addScenes(playScenes);
+					CreateScenes.this.setVisible(false);
+				}
 			}
 		});
 		this.add(btnStart);
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -82,8 +78,4 @@ public class CreateScenes extends Scenes{
 	}
 	
 	
-	public static void main(String[] args) {
-		
-	}
-
 }

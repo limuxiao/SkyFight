@@ -14,6 +14,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
 import java.io.File;
 import java.io.IOException;
 import java.security.cert.CRLReason;
@@ -134,9 +135,10 @@ public class World extends JFrame{
 		
 		
 		CreateScenes createScenes = new CreateScenes(this.width,this.height);
-		
+		createScenes.setWorld(this);
 		
 		this.addScenes(createScenes);
+		
 		
 	}
 	

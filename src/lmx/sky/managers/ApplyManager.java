@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import lmx.sky.pojo.GameObject;
+import lmx.sky.scenes.Scenes;
 
 /**
  * @classname  ApplyManager		--		渲染管理器
@@ -17,26 +18,41 @@ import lmx.sky.pojo.GameObject;
  */
 public class ApplyManager {
 	
+	private Scenes scenes;
+	
+	public ApplyManager(Scenes scenes) {
+		this.scenes = scenes;
+	}
+	
 	/**
 	 * 渲染线程池
 	 */
-	private static final ThreadPoolExecutor APPLY_POOL;
-	
-	
-	private static LinkedBlockingQueue<Runnable> queue
-		= new LinkedBlockingQueue<Runnable>();
-	
-	static {
-		APPLY_POOL = 
-				new ThreadPoolExecutor(4, 20, 10, TimeUnit.SECONDS,queue,
-						new ThreadPoolExecutor.DiscardOldestPolicy());
-	}
+	private ThreadPoolExecutor apply_pool = 
+			new ThreadPoolExecutor(4, 20, 10, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(),
+			new ThreadPoolExecutor.DiscardOldestPolicy());
 	
 	
 	/**
 	 * 渲染组件
 	 */
-	public static synchronized void apply(GameObject gameObject) {
+	public void apply(GameObject gameObject) {
+		apply_pool.execute(new ApplyRunnable(gameObject));
+	}
+	
+	
+	
+	class ApplyRunnable implements Runnable{
+
+		private GameObject gameObject;
+		
+		public ApplyRunnable(GameObject gameObject) {
+			this.gameObject = gameObject;
+		}
+		
+		@Override
+		public void run() {
+			
+		}
 		
 	}
 	

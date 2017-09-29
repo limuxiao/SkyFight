@@ -15,6 +15,7 @@ import lmx.sky.GameConfig;
 import lmx.sky.componts.Material;
 import lmx.sky.componts.RigidBody;
 import lmx.sky.componts.Translate;
+import lmx.sky.managers.ApplyManager;
 import lmx.sky.pojo.GameObject;
 import lmx.sky.tools.BaseTool;
 import lmx.sky.tools.ImageTool;
@@ -29,11 +30,22 @@ import lmx.sky.tools.ImageTool;
  */
 public class Scenes extends JPanel{
 	
+	/**
+	 * 游戏物体map
+	 */
 	private Map<String, GameObject> gameObjects = new HashMap<String, GameObject>();
 	
+	/**
+	 * 渲染管理器
+	 */
+	protected ApplyManager applyManager = new ApplyManager(Scenes.this);
 	
 	
-	protected ImageIcon iconBg;		//背景
+	/**
+	 * 所处世界
+	 */
+	protected World world;
+	
 	
 	
 	public Scenes() {
@@ -43,13 +55,6 @@ public class Scenes extends JPanel{
 	
 	public Scenes(int width, int height) {
 		this.setSize(width,height);
-		this.init();
-	}
-	
-	public Scenes(int width, int height,ImageIcon icon) {
-		this.setSize(width,height);
-		this.iconBg = icon;
-		this.iconBg.setImage(iconBg.getImage().getScaledInstance(this.getWidth(),this.getHeight(), Image.SCALE_SMOOTH)); 
 		this.init();
 	}
 	
@@ -66,9 +71,6 @@ public class Scenes extends JPanel{
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		//绘制背景
-		if(this.iconBg != null)
-			g.drawImage(iconBg.getImage(),0,0,this.getWidth(),this.getHeight(),null);
 	}
 	
 	
@@ -89,13 +91,13 @@ public class Scenes extends JPanel{
 			//get Translate
 			Translate translate = gameObject.getComponent(Translate.class);
 			if(translate != null) {
-				
+				gameObject.setLocation(translate.x, translate.y);
 			}
 			
 			//get Material
 			Material material = gameObject.getComponent(Material.class);
 			if(material != null) {
-				
+				gameObject.setIcon(material.icon);
 			}
 			
 			//get RigidBody
@@ -136,15 +138,8 @@ public class Scenes extends JPanel{
 	}
 	
 	
-	/**
-	 * set iconbg
-	 * @param icon
-	 */
-	public void setIconBg(ImageIcon icon) {
-		this.iconBg = icon;
-		this.iconBg.setImage(iconBg.getImage().getScaledInstance(this.getWidth(),this.getHeight(), Image.SCALE_SMOOTH));
-		repaint();
+	public void setWorld(World world) {
+		this.world = world;
 	}
-	
 	
 }
