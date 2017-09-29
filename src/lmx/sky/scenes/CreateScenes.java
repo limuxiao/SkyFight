@@ -23,12 +23,12 @@ import lmx.sky.tools.ImageTool;
  */
 public class CreateScenes extends Scenes{
 	
-	public CreateScenes() {
-		super();
+	public CreateScenes(World world) {
+		super(world);
 	}
 	
-	public CreateScenes(int width,int height) {
-		super(width,height);
+	public CreateScenes(World world, int width,int height) {
+		super(world,width,height);
 		joinLabel();
 	}
 	
@@ -57,8 +57,7 @@ public class CreateScenes extends Scenes{
 			public void actionPerformed(ActionEvent e) {
 				if(world != null) {
 					
-					PlayScenes playScenes = new PlayScenes(world.width,world.height);
-					playScenes.setWorld(world);
+					PlayScenes playScenes = new PlayScenes(world,world.width,world.height);
 					
 					world.addScenes(playScenes);
 					CreateScenes.this.setVisible(false);

@@ -24,13 +24,13 @@ public class PlayScenes extends Scenes{
 	
 	private MyPlane myPlane;
 	
-	public PlayScenes() {
-		super();
+	public PlayScenes(World world) {
+		super(world);
 	}
 	
 	
-	public PlayScenes(int width, int height) {
-		super(width, height);
+	public PlayScenes(World world, int width, int height) {
+		super(world,width, height);
 		joinLabel();
 	}
 	
