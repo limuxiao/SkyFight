@@ -1,5 +1,7 @@
 package lmx.sky.scenes;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -121,9 +123,7 @@ public class World extends JFrame{
 		//
 		graphics = this.getGraphics();
 		
-//		this.init();
-		
-		addScenes();
+		this.init();
 		
 		//显示窗口
 		this.setVisible(true);
@@ -132,28 +132,11 @@ public class World extends JFrame{
 	
 	public void addScenes() {
 		
-		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgStart);
 		
-		CreateScenes scenes = new CreateScenes(this.width,this.height,iconBg);
+		CreateScenes createScenes = new CreateScenes(this.width,this.height);
 		
-		//设置开始按钮
-		Icon iconStart = ImageTool.getIcon(this.config.image.gameStart);
-		btnStart = new JButton(iconStart);
-		int btnStartX = (this.width - iconStart.getIconWidth()) / 2;
-		int btnStartY = this.height - iconStart.getIconHeight() - 100;
-		btnStart.setBounds(btnStartX, btnStartY, iconStart.getIconWidth(), iconStart.getIconHeight());
-		btnStart.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-//				CreateScenes createScenes = getScenes(CreateScenes.class);
-			}
-		});
-				
 		
-		scenes.add(btnStart);
-		
-		addScenes(scenes);
+		this.addScenes(createScenes);
 		
 	}
 	
@@ -163,9 +146,9 @@ public class World extends JFrame{
 	 * @param scenes
 	 */
 	public void addScenes(Scenes scenes){
-		this.add(scenes);
+		c.add(scenes);
 		this.scenesMap.put(scenes.getClass().getSimpleName(), scenes);
-		this.setComponentZOrder(scenes, 0);
+		c.setComponentZOrder(scenes, 0);
 	}
 	
 	/**
@@ -185,8 +168,7 @@ public class World extends JFrame{
 		//初始化监听器
 		this.initListener();
 		
-		//初始化panel
-		this.initPanel();
+		addScenes();
 		
 		//设置游戏状态
 		this.setCurState(GameState.CREATE);
@@ -206,43 +188,6 @@ public class World extends JFrame{
 		//添加鼠标监听器
 		myMouseListener = new GameMouseListener();
 		this.addMouseListener(myMouseListener);
-		
-	}
-	
-	/**
-	 * 初始化panel
-	 */
-	private void initPanel() {
-		
-		
-		//设置背景
-		ImageIcon iconBg = (ImageIcon)ImageTool.getIcon(this.config.image.bgStart);
-		iconBg.setImage(iconBg.getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH));  
-		labelBg = new JLabel(iconBg);
-		labelBg.setBounds(0, 0, this.width, this.height);
-		c.add(labelBg);
-		
-		//设置开始按钮
-		Icon iconStart = ImageTool.getIcon(this.config.image.gameStart);
-		btnStart = new JButton(iconStart);
-		int btnStartX = (this.width - iconStart.getIconWidth()) / 2;
-		int btnStartY = this.height - iconStart.getIconHeight() - 100;
-		btnStart.setBounds(btnStartX, btnStartY, iconStart.getIconWidth(), iconStart.getIconHeight());
-		btnStart.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startGame();
-			}
-		});
-		
-		
-		JPanel panel = new JPanel();
-		
-		c.add(btnStart);
-		
-		
-		
 		
 	}
 	

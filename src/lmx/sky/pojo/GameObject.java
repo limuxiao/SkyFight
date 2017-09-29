@@ -130,8 +130,8 @@ public class GameObject extends JLabel implements Serializable{
 	 * @param id
 	 * @return
 	 */
-	public GameObject findGameObjectByID(String id) {
-		return this.gameObjects.get(id);
+	public <GameObject> GameObject findGameObjectByID(String id) {
+		return (GameObject)this.gameObjects.get(id);
 	}
 	
 	/**
@@ -139,12 +139,14 @@ public class GameObject extends JLabel implements Serializable{
 	 * @param clazz
 	 * @return
 	 */
-	public List<GameObject> findGameObjectsByClass(Class<GameObject> clazz){
-		List<GameObject> list = new ArrayList<>();
+	@SuppressWarnings("unchecked")
+	public <T> List<T> findGameObjectsByClass(Class<T> clazz){
+		List<T> list = new ArrayList<>();
 		for(GameObject gameObject : this.gameObjects.values()) {
 			
-			if(gameObject.getClass().getSimpleName() == clazz.getSimpleName()) 
-				list.add(gameObject);
+			if(gameObject.getClass().getSimpleName().equals(clazz.getSimpleName())) {
+				list.add((T)gameObject);
+			}
 			
 		}
 		return list;

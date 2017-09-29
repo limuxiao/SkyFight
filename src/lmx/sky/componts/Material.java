@@ -11,7 +11,7 @@ import javax.swing.Icon;
  *
  * @version V1.0.1
  */
-public class Material extends BaseComponent {
+public class Material extends ApplyComponent {
 
 	
 	public Icon icon;

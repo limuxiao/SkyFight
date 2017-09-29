@@ -8,7 +8,7 @@ package lmx.sky.componts;
  *
  * @version V1.0.1
  */
-public class Translate extends BaseComponent{
+public class Translate extends ApplyComponent{
 	
 	public int x;	//横坐标
 	public int y;	//纵坐标

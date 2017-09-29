@@ -31,22 +31,31 @@ public class Scenes extends JPanel{
 	
 	private Map<String, GameObject> gameObjects = new HashMap<String, GameObject>();
 	
+	
+	
 	protected ImageIcon iconBg;		//背景
 	
 	
 	public Scenes() {
-		
+		this.init();
 	
 	}
 	
 	public Scenes(int width, int height) {
 		this.setSize(width,height);
+		this.init();
 	}
 	
 	public Scenes(int width, int height,ImageIcon icon) {
 		this.setSize(width,height);
 		this.iconBg = icon;
 		this.iconBg.setImage(iconBg.getImage().getScaledInstance(this.getWidth(),this.getHeight(), Image.SCALE_SMOOTH)); 
+		this.init();
+	}
+	
+	
+	protected void init() {
+		this.setLayout(null);		//默认布局置空
 	}
 	
 	
