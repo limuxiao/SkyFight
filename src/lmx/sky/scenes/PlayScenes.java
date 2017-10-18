@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import lmx.sky.GameConfig;
 import lmx.sky.componts.Translate;
+import lmx.sky.listener.GameKeyListener;
 import lmx.sky.pojo.GameObject;
 import lmx.sky.pojo.MyPlane;
 import lmx.sky.tools.ImageTool;
@@ -26,11 +27,6 @@ public class PlayScenes extends Scenes{
 	
 	public PlayScenes(World world) {
 		super(world);
-	}
-	
-	
-	public PlayScenes(World world, int width, int height) {
-		super(world,width, height);
 		joinLabel();
 	}
 	
@@ -45,8 +41,7 @@ public class PlayScenes extends Scenes{
 		GameObject gameObject = new GameObject();
 		gameObject.setBounds(0, 0, this.getWidth(), this.getHeight());
 		gameObject.setIcon(iconBg);
-//		this.addGameObject(gameObject);
-		this.add(gameObject);
+		this.addGameObject(gameObject);
 		
 		//添加角色
 		myPlane = new MyPlane();
@@ -55,6 +50,8 @@ public class PlayScenes extends Scenes{
 		translate.y = this.getHeight() / 2;
 		
 		this.addGameObject(myPlane);
+		
+		this.addKeyListener(new GameKeyListener(this.world));
 	}
 	
 	

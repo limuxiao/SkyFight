@@ -50,14 +50,9 @@ public class Scenes extends JPanel{
 	
 	public Scenes(World world) {
 		this.world = world;
+		this.setSize(this.world.width,this.world.height);
 		this.init();
 	
-	}
-	
-	public Scenes(World world,int width, int height) {
-		this.world = world;
-		this.setSize(width,height);
-		this.init();
 	}
 	
 	

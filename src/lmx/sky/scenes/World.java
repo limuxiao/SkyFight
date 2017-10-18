@@ -134,7 +134,7 @@ public class World extends JFrame{
 	public void addScenes() {
 		
 		
-		CreateScenes createScenes = new CreateScenes(this,this.width,this.height);
+		CreateScenes createScenes = new CreateScenes(this);
 		
 		this.addScenes(createScenes);
 		
